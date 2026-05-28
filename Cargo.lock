@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "opencore-amrnb-src"
+name = "opencore-amrnb"
 version = "0.1.6"

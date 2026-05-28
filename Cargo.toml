@@ -1,5 +1,5 @@
 [package]
-name = "opencore-amrnb-src"
+name = "opencore-amrnb"
 # Matches the upstream opencore-amr release we vendor (0.1.6, Sept 2017 —
 # the last tagged release). If we ever apply local changes on top of the
 # emcc build glue we bump with semver build metadata (e.g. `0.1.6+vt.1`).
@@ -7,10 +7,10 @@ version = "0.1.6"
 edition = "2024"
 rust-version = "1.95"
 license = "Apache-2.0"
-description = "Vendored opencore-amr-nb (Apache 2.0, by Martin Storsjö / PacketVideo) compiled to a standalone WebAssembly artifact via Emscripten. Source under `vendor/` is unmodified upstream — see `vendor/LICENSE`. Native (non-wasm32) builds are a no-op; consumers keep their existing `#[link(name = \"opencore-amrnb\")]` system link."
-repository = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
-homepage = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
-documentation = "https://docs.rs/opencore-amrnb-src"
+description = "Vendored opencore-amr-nb (Apache 2.0, by Martin Storsjö / PacketVideo) compiled to a standalone WebAssembly artifact via Emscripten. Source under `vendor/` is unmodified upstream — see `vendor/LICENSE`. Native (non-wasm32) builds are a no-op; consumers keep their existing libopencore-amrnb system link unaffected."
+repository = "https://github.com/voicetastic/opencore-amrnb"
+homepage = "https://github.com/voicetastic/opencore-amrnb"
+documentation = "https://docs.rs/opencore-amrnb"
 readme = "README.md"
 keywords = ["amr", "amr-nb", "codec", "wasm", "emscripten"]
 categories = ["multimedia::audio", "wasm", "external-ffi-bindings"]

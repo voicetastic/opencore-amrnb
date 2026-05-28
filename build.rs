@@ -17,7 +17,7 @@ fn main() {
 
     if Command::new("emcc").arg("--version").output().is_err() {
         panic!(
-            "opencore-amrnb-src: building for wasm32 but `emcc` (emscripten) \
+            "opencore-amrnb: building for wasm32 but `emcc` (emscripten) \
              is not in PATH. Install it (`pacman -S emscripten` on Arch) and \
              source its profile (`source /etc/profile.d/emscripten.sh`)."
         );
