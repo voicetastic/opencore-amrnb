@@ -1,0 +1,15 @@
+[package]
+name = "opencore-amrnb-src"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "Apache-2.0"
+description = "Vendored opencore-amr-nb (Apache 2.0, by Martin Storsjö / PacketVideo) compiled to a standalone wasm artifact via emscripten. Used by Voicetastic's browser client for AMR-NB encode/decode; the source under `vendor/` is unmodified — see `vendor/LICENSE`."
+repository = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
+
+# No public API for native consumers — the desktop / Android path keeps its
+# existing `#[link(name = "opencore-amrnb")]` system link. This crate exists
+# to host the wasm build artifact, exposed via `wasm_module_bytes()` on
+# wasm32. Native builds are a no-op (build.rs returns early).
+[lib]
+path = "src/lib.rs"
