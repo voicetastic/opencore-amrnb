@@ -39,6 +39,8 @@ include = [
 path = "src/lib.rs"
 
 [package.metadata.docs.rs]
-# docs.rs builds for native by default, where this crate is a no-op stub.
-# Build for wasm32 too so the wasm-only `wasm_module_bytes()` doc lands.
-targets = ["wasm32-unknown-unknown"]
+# Build for both targets so `wasm_module_bytes()` lands in the docs with
+# an "Available on wasm32 only" badge, and the native (no-op) view is
+# also rendered. Default target is x86_64-unknown-linux-gnu; adding
+# wasm32-unknown-unknown surfaces the wasm-gated public API.
+targets = ["wasm32-unknown-unknown", "x86_64-unknown-linux-gnu"]
