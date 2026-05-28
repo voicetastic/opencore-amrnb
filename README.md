@@ -1,13 +1,13 @@
-# opencore-amrnb-src
+# opencore-amrnb
 
-[![crates.io](https://img.shields.io/crates/v/opencore-amrnb-src.svg)](https://crates.io/crates/opencore-amrnb-src)
-[![docs.rs](https://docs.rs/opencore-amrnb-src/badge.svg)](https://docs.rs/opencore-amrnb-src)
+[![crates.io](https://img.shields.io/crates/v/opencore-amrnb.svg)](https://crates.io/crates/opencore-amrnb)
+[![docs.rs](https://docs.rs/opencore-amrnb/badge.svg)](https://docs.rs/opencore-amrnb)
 
 Vendored [opencore-amr-nb](https://sourceforge.net/projects/opencore-amr/)
 (Apache 2.0, by Martin Storsjö / PacketVideo, the AMR-NB implementation
 shipped in Android AOSP and used by ffmpeg/gstreamer) compiled to a
 standalone WebAssembly artifact via [Emscripten](https://emscripten.org/).
-Originally written for [Voicetastic](https://git.cha-sam.re/voicetastic)'s
+Originally written for [Voicetastic](https://github.com/voicetastic)'s
 browser client, but useful for any Rust + wasm project that needs AMR-NB
 encode/decode.
 
@@ -29,7 +29,7 @@ top of the build glue, if any, are tagged with semver build metadata
 
 ```toml
 [dependencies]
-opencore-amrnb-src = "0.1"
+opencore-amrnb = "0.1"
 ```
 
 ```rust
@@ -38,7 +38,7 @@ opencore-amrnb-src = "0.1"
 // plus `malloc` / `free`). Instantiate it from JS — see the JS shim
 // in voicetastic-core's `codec/amrnb_shim.js` for a working example.
 #[cfg(target_arch = "wasm32")]
-let bytes: &'static [u8] = opencore_amrnb_src::wasm_module_bytes();
+let bytes: &'static [u8] = opencore_amrnb::wasm_module_bytes();
 ```
 
 The exported wasm imports one symbol — `env.emscripten_notify_memory_growth(idx: u32)` — which you supply as a no-op in the JS instantiation `importObject`.
