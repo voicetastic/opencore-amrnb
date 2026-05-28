@@ -1,11 +1,35 @@
 [package]
 name = "opencore-amrnb-src"
-version = "0.1.0"
+# Matches the upstream opencore-amr release we vendor (0.1.6, Sept 2017 —
+# the last tagged release). If we ever apply local changes on top of the
+# emcc build glue we bump with semver build metadata (e.g. `0.1.6+vt.1`).
+version = "0.1.6"
 edition = "2024"
 rust-version = "1.95"
 license = "Apache-2.0"
-description = "Vendored opencore-amr-nb (Apache 2.0, by Martin Storsjö / PacketVideo) compiled to a standalone wasm artifact via emscripten. Used by Voicetastic's browser client for AMR-NB encode/decode; the source under `vendor/` is unmodified — see `vendor/LICENSE`."
+description = "Vendored opencore-amr-nb (Apache 2.0, by Martin Storsjö / PacketVideo) compiled to a standalone WebAssembly artifact via Emscripten. Source under `vendor/` is unmodified upstream — see `vendor/LICENSE`. Native (non-wasm32) builds are a no-op; consumers keep their existing `#[link(name = \"opencore-amrnb\")]` system link."
 repository = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
+homepage = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
+documentation = "https://docs.rs/opencore-amrnb-src"
+readme = "README.md"
+keywords = ["amr", "amr-nb", "codec", "wasm", "emscripten"]
+categories = ["multimedia::audio", "wasm", "external-ffi-bindings"]
+# Explicit allowlist so `cargo package` produces a minimal, reproducible
+# archive. Excludes nothing — the vendor/ tree contains only headers and
+# .cpp we actually compile — but pinning what we publish protects against
+# stray local files (e.g. editor scratch) sneaking into a release.
+include = [
+    "src/**/*.rs",
+    "build.rs",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE",
+    "vendor/**/*.cpp",
+    "vendor/**/*.c",
+    "vendor/**/*.h",
+    "vendor/**/*.sym",
+    "vendor/LICENSE",
+]
 
 # No public API for native consumers — the desktop / Android path keeps its
 # existing `#[link(name = "opencore-amrnb")]` system link. This crate exists
@@ -13,3 +37,8 @@ repository = "https://git.cha-sam.re/voicetastic/opencore-amrnb-src"
 # wasm32. Native builds are a no-op (build.rs returns early).
 [lib]
 path = "src/lib.rs"
+
+[package.metadata.docs.rs]
+# docs.rs builds for native by default, where this crate is a no-op stub.
+# Build for wasm32 too so the wasm-only `wasm_module_bytes()` doc lands.
+targets = ["wasm32-unknown-unknown"]
